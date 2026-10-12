@@ -1,0 +1,13 @@
+services:
+  simple-pages:
+    networks:
+      simple-pages-interna: {}
+      proxy-publico:
+        aliases:
+          - simple-pages
+
+networks:
+  proxy-publico:
+    external: true
+    name: proxy-publico
+

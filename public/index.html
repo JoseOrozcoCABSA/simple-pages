@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academia CABSA · Avance de licencias</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Academia CABSA</p>
+      <h1>Avance de licencias por estado</h1>
+      <p class="muted">Tablero protegido para seguimiento operativo.</p>
+    </div>
+    <div class="header-actions">
+      <span id="updated" class="muted"></span>
+      <button id="reset" class="button secondary" type="button">Borrar datos</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary-grid" aria-label="Resumen nacional">
+      <article class="summary-card"><span>Creadas</span><strong id="total-created">0</strong></article>
+      <article class="summary-card"><span>Entregadas</span><strong id="total-delivered">0</strong></article>
+      <article class="summary-card"><span>Activadas</span><strong id="total-active">0</strong></article>
+      <article class="summary-card accent"><span>En uso</span><strong id="total-used">0</strong></article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">Captura controlada</p><h2>Avance por estado</h2></div>
+        <span id="warning" class="warning" hidden></span>
+      </div>
+      <div id="states" class="states"></div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-heading"><div><p class="eyebrow">Seguimiento</p><h2>Historial de cortes</h2></div><button id="save-cut" class="button" type="button">Guardar corte</button></div>
+      <div id="history-empty" class="empty">Todavía no hay cortes guardados.</div>
+      <div class="table-wrap"><table id="history-table" hidden><thead><tr><th>Fecha</th><th>Creadas</th><th>Entregadas</th><th>Activadas</th><th>En uso</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </main>
+  <footer>Academia CABSA · Los datos de este tablero se guardan localmente en este navegador.</footer>
+  <script src="app.js"></script>
+</body>
+</html>
+

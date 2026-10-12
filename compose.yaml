@@ -1,0 +1,17 @@
+name: simple-pages
+
+services:
+  simple-pages:
+    image: cabsa/simple-pages:local
+    build: .
+    restart: unless-stopped
+    environment:
+      SIMPLE_PAGES_USER: ${SIMPLE_PAGES_USER:?Configura SIMPLE_PAGES_USER en .env}
+      SIMPLE_PAGES_PASSWORD_HASH: ${SIMPLE_PAGES_PASSWORD_HASH:?Configura SIMPLE_PAGES_PASSWORD_HASH en .env}
+    networks:
+      simple-pages-interna: {}
+
+networks:
+  simple-pages-interna:
+    internal: true
+
