@@ -3,48 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Academia CABSA · Avance de licencias</title>
+  <title>Avance de licencias por estado · Academia CABSA</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div>
-      <p class="eyebrow">Academia CABSA</p>
-      <h1>Avance de licencias por estado</h1>
-      <p class="muted">Tablero protegido para seguimiento operativo.</p>
-    </div>
-    <div class="header-actions">
-      <span id="updated" class="muted"></span>
-      <button id="reset" class="button secondary" type="button">Borrar datos</button>
-    </div>
-  </header>
-
-  <main>
-    <section class="summary-grid" aria-label="Resumen nacional">
-      <article class="summary-card"><span>Creadas</span><strong id="total-created">0</strong></article>
-      <article class="summary-card"><span>Entregadas</span><strong id="total-delivered">0</strong></article>
-      <article class="summary-card"><span>Activadas</span><strong id="total-active">0</strong></article>
-      <article class="summary-card accent"><span>En uso</span><strong id="total-used">0</strong></article>
-      <article class="summary-card"><span>Población meta</span><strong id="total-target">0</strong></article>
-    </section>
-
-    <section class="panel">
-      <div class="panel-heading">
-        <div><p class="eyebrow">Captura controlada</p><h2>Avance por estado</h2></div>
-        <span id="warning" class="warning" hidden></span>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand-wrap">
+        <img src="assets/academia-cabsa-logo.png" alt="Academia CABSA">
+        <div class="brand-title"><span>Tablero de avance</span><h1>Avance de licencias por estado</h1></div>
       </div>
-      <p class="muted">Cada estado conserva creadas, entregadas, activadas, en uso nuevos, en uso por membresía y población meta.</p>
-      <div id="states" class="states"></div>
+      <div class="header-actions"><span id="updated">Datos iniciales</span><button id="reset" class="btn secondary" type="button">Borrar datos</button></div>
+    </header>
+
+    <div class="legend">
+      <span><i class="swatch target"></i>Población meta</span><span><i class="swatch created"></i>Creadas</span><span><i class="swatch delivered"></i>Entregadas</span><span><i class="swatch active"></i>Activadas · en uso</span><span><i class="swatch free"></i>Activadas · gratuitas promocionales</span><span><i class="swatch new"></i>En uso · clientes nuevos</span><span><i class="swatch member"></i>En uso · agrega a su membresía</span>
+    </div>
+
+    <section class="top-grid">
+      <div class="funnel section-pad"><div class="section-heading"><h2>Embudo nacional</h2><span>% vs. etapa anterior</span></div><div id="national-funnel"></div><div id="warning" class="warning" hidden></div></div>
+      <div class="comparison section-pad"><div class="section-heading"><h2>Comparativo por estado</h2><span>En uso / activadas</span></div><div id="comparison-list"></div></div>
     </section>
 
-    <section class="panel history-panel">
-      <div class="panel-heading"><div><p class="eyebrow">Seguimiento</p><h2>Historial de cortes</h2></div><button id="save-cut" class="button" type="button">Guardar corte</button></div>
-      <div id="history-empty" class="empty">Todavía no hay cortes guardados.</div>
-      <div class="table-wrap"><table id="history-table" hidden><thead><tr><th>Fecha</th><th>Creadas</th><th>Entregadas</th><th>Activadas</th><th>En uso</th><th>Acciones</th></tr></thead><tbody></tbody></table></div>
+    <section class="history section-pad">
+      <div class="history-head"><div><div class="section-heading left"><h2>Historial</h2><span id="history-tag" class="tag" hidden>Datos de ejemplo</span></div><p>Cada corte guarda una foto de las cifras. Los cortes se guardan en este navegador y pueden restaurarse.</p></div><div class="cut-actions"><label>Fecha del corte<input id="cut-date" type="date"></label><button id="save-cut" class="btn primary" type="button">Guardar corte</button></div></div>
+      <div id="scopes" class="scopes"></div>
+      <div class="history-grid"><div><div class="chart-legend"><span><i class="line created"></i>Creadas</span><span><i class="line delivered"></i>Entregadas</span><span><i class="line active"></i>Activadas</span><span><i class="line used"></i>En uso</span></div><svg id="history-chart" viewBox="0 0 700 230" role="img" aria-label="Evolución histórica"></svg></div><div class="table-wrap"><div id="history-empty" class="empty">Aún no hay cortes. Captura las cifras y presiona «Guardar corte».</div><table id="history-table" hidden><thead><tr><th>Fecha</th><th>Creadas</th><th>Entregadas</th><th>Activadas</th><th>En uso</th><th>Δ en uso</th><th></th></tr></thead><tbody></tbody></table></div></div>
     </section>
-  </main>
-  <footer>Academia CABSA · Los datos de este tablero se guardan localmente en este navegador.</footer>
+
+    <section class="capture-title"><h2>Captura por estado</h2><span>Las gratuitas se calculan: activadas − en uso. Todo se guarda en este navegador.</span></section>
+    <section id="capture" class="capture"></section>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>
-
