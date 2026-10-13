@@ -7,7 +7,16 @@ const STATES = [
   ['bc', 'Baja California', 'Sin registros en el CSV', [0, 0, 0, 0, 0, 0]],
   ['nd', 'Sin estado', '319 registros · 274 con membresía · 311 activos', [319, 274, 311, 2, 3, 0]]
 ];
-const DEFAULT_DATA = Object.fromEntries(STATES.map(([id, , , values]) => [id, values.slice()]));
+// Valores iniciales oficiales del HTML original Avance Licencias.dc.html.
+const ORIGINAL_DEFAULTS = {
+  son: [80, 52, 30, 6, 9, 1800],
+  qro: [120, 96, 71, 14, 22, 1200],
+  slp: [40, 22, 11, 2, 3, 700],
+  mex: [55, 30, 14, 3, 2, 900],
+  bc: [12, 4, 1, 0, 0, 400],
+  nd: [18, 6, 2, 0, 1, 0]
+};
+const DEFAULT_DATA = Object.fromEntries(STATES.map(([id]) => [id, ORIGINAL_DEFAULTS[id].slice()]));
 const normalize = value => { const v = Array.isArray(value) ? value : []; return v.length >= 6 ? v.slice(0, 6).map(Number) : [v[0] || 0, v[1] || 0, v[2] || 0, 0, v[3] || 0, v[4] || 0]; };
 const clone = value => JSON.parse(JSON.stringify(value));
 const fmt = value => new Intl.NumberFormat('es-MX').format(value || 0);
@@ -89,5 +98,5 @@ function renderCapture() {
 function render() { document.querySelector('#updated').textContent = saved.updated ? `Actualizado ${new Date(saved.updated).toLocaleString('es-MX')}` : 'Actualizado — datos del CSV'; renderFunnel(); renderComparison(); renderHistory(); renderCapture(); }
 document.querySelector('#cut-date').value = today();
 document.querySelector('#save-cut').addEventListener('click', () => { history.push({ date: document.querySelector('#cut-date').value || today(), values: totals(), data: clone(data) }); saveState(); });
-document.querySelector('#reset').addEventListener('click', () => { if (!confirm('¿Restaurar los datos iniciales del CSV?')) return; data = clone(DEFAULT_DATA); saveState(); });
+document.querySelector('#reset').addEventListener('click', () => { if (!confirm('¿Restaurar los datos iniciales del HTML original?')) return; data = clone(DEFAULT_DATA); saveState(); });
 render();
