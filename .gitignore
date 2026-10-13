@@ -5,4 +5,6 @@ runtime/
 node_modules/
 dist/
 *.log
+# Exportaciones con datos personales; solo se usan localmente para calcular agregados.
+usuarios-cabsa-filtrados*.csv
 
