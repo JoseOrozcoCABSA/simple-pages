@@ -3,7 +3,9 @@ FROM nginx:1.27-alpine
 RUN apk add --no-cache openssl
 
 COPY public/ /usr/share/nginx/html/
-COPY infra/nginx.conf /etc/nginx/templates/default.conf.template
+# El entrypoint personalizado no ejecuta el procesador de plantillas de la
+# imagen oficial de Nginx; por eso la configuracion se instala directamente.
+COPY infra/nginx.conf /etc/nginx/conf.d/default.conf
 COPY infra/entrypoint.sh /usr/local/bin/simple-pages-entrypoint
 
 RUN chmod +x /usr/local/bin/simple-pages-entrypoint
